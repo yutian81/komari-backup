@@ -1,8 +1,6 @@
 FROM ghcr.io/komari-monitor/komari:latest
 
-RUN apk add --no-cache bash curl wget git sqlite jq tar dcron tzdata
-
-WORKDIR /app
+RUN apk add --no-cache bash curl wget git sqlite jq tar dcron
 
 COPY komari_bak.sh /app/data/komari_bak.sh
 RUN chmod +x /app/data/komari_bak.sh
