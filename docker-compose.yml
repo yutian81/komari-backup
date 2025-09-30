@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  komari:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: komari
+    restart: always
+    ports:
+      - "25774:25774"
+    environment:
+      # GitHub 备份相关变量（从 .env 文件里读取）
+      GH_BACKUP_USER: ${GH_BACKUP_USER}
+      GH_REPO: ${GH_REPO}
+      GH_PAT: ${GH_PAT}
+      GH_EMAIL: ${GH_EMAIL}
+
+      # Komari 面板环境变量（保持官方一致）
+      GIN_MODE: release
+      KOMARI_DB_TYPE: sqlite
+      KOMARI_DB_FILE: /opt/komari/data/komari.db
+      KOMARI_LISTEN: 0.0.0.0:25774
+
+    volumes:
+      - komari_data:/opt/komari/data
+
+volumes:
+  komari_data:
