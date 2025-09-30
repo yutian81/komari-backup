@@ -2,18 +2,21 @@ version: "3.9"
 
 services:
   komari:
-    image: ghcr.io/komari-backup/komari:latest
+    image: ghcr.io/komari-monitor/komari:latest
     container_name: komari
     restart: unless-stopped
     ports:
       - "25774:25774"
     environment:
+      # 只需要覆盖需要修改的变量
+      - KOMARI_DB_FILE=/app/data/komari.db
+      - KOMARI_LISTEN=0.0.0.0:25774
       # 备份相关环境变量
       - GH_BACKUP_USER=your_github_username
       - GH_REPO=your_private_repo_name
       - GH_PAT=your_github_personal_access_token
       - GH_EMAIL=your_github_email@example.com
-      - KOMARI_DATA_DIR=/app/data
+      # 登录鉴权变量
       - ADMIN_USERNAME=yourusername
       - ADMIN_PASSWORD=yourpassword
       # 可选argo变量
@@ -21,4 +24,4 @@ services:
       # - KOMARI_CLOUDFLARED_TOKEN=eyJxxxxx
     volumes:
       - ./data:/app/data
-      - ./komari_bak.sh:/opt/komari/data/komari_bak.sh:ro
+  
