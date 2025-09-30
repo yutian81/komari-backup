@@ -14,8 +14,8 @@ services:
       - GH_PAT=your_github_personal_access_token
       - GH_EMAIL=your_github_email@example.com
       - KOMARI_DATA_DIR=/app/data
-      - ADMIN_USERNAME: yourusername
-      - ADMIN_PASSWORD: yourpassword
+      - ADMIN_USERNAME=yourusername
+      - ADMIN_PASSWORD=yourpassword
       # 可选argo变量
       - KOMARI_ENABLE_CLOUDFLARED=true
       - KOMARI_CLOUDFLARED_TOKEN=eyJxxxxx
