@@ -17,8 +17,8 @@ services:
       - ADMIN_USERNAME=yourusername
       - ADMIN_PASSWORD=yourpassword
       # 可选argo变量
-      - KOMARI_ENABLE_CLOUDFLARED=true
-      - KOMARI_CLOUDFLARED_TOKEN=eyJxxxxx
+      # - KOMARI_ENABLE_CLOUDFLARED=true
+      # - KOMARI_CLOUDFLARED_TOKEN=eyJxxxxx
     volumes:
       - ./data:/app/data
       - ./komari_bak.sh:/opt/komari/data/komari_bak.sh:ro
