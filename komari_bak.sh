@@ -20,10 +20,11 @@
 #---------------------------------------------------------------
 # GITHUB 仓库配置 (请务必修改为自己的信息)
 #---------------------------------------------------------------
-GH_BACKUP_USER="your_github_username"
-GH_REPO="your_private_repo_name"
-GH_PAT="your_github_personal_access_token"
-GH_EMAIL="your_github_email@example.com"
+GH_BACKUP_USER="${GH_BACKUP_USER:-your_github_username}"
+GH_REPO="${GH_REPO:-your_private_repo_name}"
+GH_PAT="${GH_PAT:-your_github_personal_access_token}"
+GH_EMAIL="${GH_EMAIL:-your_github_email@example.com}"
+DATA_DIR="${KOMARI_DATA_DIR:-/opt/komari/data}"
 
 #---------------------------------------------------------------
 # 面板工作目录配置 (如果不是默认路径，请修改)
