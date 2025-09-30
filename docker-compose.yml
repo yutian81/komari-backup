@@ -7,7 +7,6 @@ services:
     restart: unless-stopped
     ports:
       - "25774:25774"
-    # env_file: .env
     environment:
       - KOMARI_DB_TYPE=sqlite
       - KOMARI_DB_FILE=/opt/komari/data/komari.db
