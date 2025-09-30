@@ -8,12 +8,17 @@ services:
     ports:
       - "25774:25774"
     environment:
-      - KOMARI_DB_TYPE=sqlite
-      - KOMARI_DB_FILE=/opt/komari/data/komari.db
-      - KOMARI_LISTEN=0.0.0.0:25774
+      # 备份相关环境变量
       - GH_BACKUP_USER=your_github_username
       - GH_REPO=your_private_repo_name
       - GH_PAT=your_github_personal_access_token
       - GH_EMAIL=your_github_email@example.com
+      - KOMARI_DATA_DIR=/app/data
+      - ADMIN_USERNAME: yourusername
+      - ADMIN_PASSWORD: yourpassword
+      # 可选argo变量
+      - KOMARI_ENABLE_CLOUDFLARED=true
+      - KOMARI_CLOUDFLARED_TOKEN=eyJxxxxx
     volumes:
       - ./data:/app/data
+      - ./komari_bak.sh:/opt/komari/data/komari_bak.sh:ro
