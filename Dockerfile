@@ -8,7 +8,7 @@ COPY komari_bak.sh /app/data/komari_bak.sh
 RUN chmod +x /app/data/komari_bak.sh
 
 # 设置每日凌晨 4 点执行备份任务，日志输出到 /var/log/cron.log
-RUN echo "0 4 * * * root /app/data/komari_bak.sh bak >> /var/log/cron.log 2>&1" > /etc/crontabs/root
+RUN echo "0 4 * * * root /app/data/komari_bak.sh bak" > /etc/crontabs/root
 
 # 容器启动命令
 CMD ["/bin/sh", "-c", "/usr/sbin/crond -f -L /var/log/cron.log & exec /app/komari server"]
