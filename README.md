@@ -31,8 +31,9 @@ docker run -d \
   # 【可选】如果你需要启用 Cloudflare Tunnel，请取消注释并填写以下两行
   # -e KOMARI_ENABLE_CLOUDFLARED="true" \
   # -e KOMARI_CLOUDFLARED_TOKEN="eyJxxxxx" \
+  --log-opt max-size=5m \
+  --log-opt max-file=5 \
   ghcr.io/yutian81/komari-backup:latest
 ```
 
 或者使用仓库中的 `docker-copmose.yml` 来部署，命令：`docker compose up -d`
-
