@@ -7,8 +7,8 @@ RUN apk add --no-cache bash curl wget git sqlite jq tar dcron
 COPY komari_bak.sh /app/data/komari_bak.sh
 RUN chmod +x /app/data/komari_bak.sh
 
-# 设置每日凌晨 4 点执行备份任务
-RUN echo "0 4 * * * root /app/data/komari_bak.sh bak" > /etc/crontabs/root
+# 设置为 UTC 时间 20:00 (即北京时间 04:00) 执行备份任务
+RUN echo "0 20 * * * root /app/data/komari_bak.sh bak" > /etc/crontabs/root
 
 # 容器启动命令
 CMD ["/bin/sh", "-c", "/usr/sbin/crond -f & exec /app/komari server"]
