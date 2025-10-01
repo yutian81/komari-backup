@@ -21,4 +21,7 @@ services:
       # - KOMARI_CLOUDFLARED_TOKEN=eyJxxxxx
     volumes:
       - ./komari-data:/app/data
-  
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "5"
