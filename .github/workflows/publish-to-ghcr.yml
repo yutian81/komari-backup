@@ -35,9 +35,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: |
-            ghcr.io/yutian81/komari-backup:latest
-            # 也可以添加一个基于 git commit SHA 的标签，以提供唯一版本号
-            # ghcr.io/yutian81/komari-backup:${{ github.sha }}
+          tags: ghcr.io/yutian81/komari-backup:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
