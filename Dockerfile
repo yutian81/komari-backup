@@ -7,7 +7,7 @@ RUN apk add --no-cache bash curl wget git sqlite jq tar dcron
 COPY komari_bak.sh /app/data/komari_bak.sh
 RUN chmod +x /app/data/komari_bak.sh
 
-# 设置每日凌晨 4 点执行备份任务，日志输出到 /var/log/cron.log
+# 设置每日凌晨 4 点执行备份任务
 RUN echo "0 4 * * * root /app/data/komari_bak.sh bak" > /etc/crontabs/root
 
 # 容器启动命令
