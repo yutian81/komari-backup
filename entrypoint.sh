@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 定义文件路径
-CRON_ENV_FILE="app/cron_env.sh"
+CRON_ENV_FILE="/app/cron_env.sh"
 CRONTAB_FILE="/etc/crontabs/root"
 BACKUP_SCRIPT="/app/komari_bak.sh"
 
