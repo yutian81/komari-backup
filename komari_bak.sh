@@ -37,15 +37,13 @@ info() { echo -e "\033[32m\033[01m$*\033[0m"; }     # 绿色
 error() { echo -e "\033[31m\033[01m$*\033[0m" && exit 1; } # 红色
 hint() { echo -e "\033[33m\033[01m$*\033[0m"; }     # 黄色
 
-# 检查 GH_PAT，防止 Cron 任务因缺少环境变量而失败
-if [ "$GH_PAT" = "your_github_personal_access_token" ] || [ -z "$GH_PAT" ]; then
-    error "GitHub PAT 未正确设置。Cron 任务不会自动继承 Docker 环境变量。请确保在运行容器时使用 -e GH_PAT=... 正确设置。"
-fi
-
 # 备份函数
 do_backup() {
     info "============== 开始执行 Komari 备份任务 =============="
-    
+
+    if [ "$GH_PAT" = "your_github_personal_access_token" ] || [ -z "$GH_PAT" ]; then
+        error "GitHub PAT 未正确设置。请确保在运行容器时使用 -e GH_PAT=... 正确设置。"
+    fi
     cd "$WORK_DIR" || error "无法进入工作目录: $WORK_DIR"
 
     hint "正在克隆备份仓库..."
