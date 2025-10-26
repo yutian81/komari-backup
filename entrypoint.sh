@@ -3,7 +3,7 @@
 # 定义文件路径
 CRON_ENV_FILE="app/cron_env.sh"
 CRONTAB_FILE="/etc/crontabs/root"
-BACKUP_SCRIPT="/app/data/komari_bak.sh"
+BACKUP_SCRIPT="/app/komari_bak.sh"
 
 echo "#!/usr/bin/env bash" > "$CRON_ENV_FILE"
 echo "export GH_BACKUP_USER=\"$GH_BACKUP_USER\"" >> "$CRON_ENV_FILE"
