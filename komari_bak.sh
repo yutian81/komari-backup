@@ -37,6 +37,11 @@ info() { echo -e "\033[32m\033[01m$*\033[0m"; }     # 绿色
 error() { echo -e "\033[31m\033[01m$*\033[0m" && exit 1; } # 红色
 hint() { echo -e "\033[33m\033[01m$*\033[0m"; }     # 黄色
 
+# 检查 GH_PAT，防止 Cron 任务因缺少环境变量而失败
+if [ "$GH_PAT" = "your_github_personal_access_token" ] || [ -z "$GH_PAT" ]; then
+    error "GitHub PAT 未正确设置。Cron 任务不会自动继承 Docker 环境变量。请确保在运行容器时使用 -e GH_PAT=... 正确设置。"
+fi
+
 # 备份函数
 do_backup() {
     info "============== 开始执行 Komari 备份任务 =============="
@@ -44,7 +49,6 @@ do_backup() {
     cd "$WORK_DIR" || error "无法进入工作目录: $WORK_DIR"
 
     hint "正在克隆备份仓库..."
-    # 使用 /tmp 目录作为临时工作区
     BACKUP_TEMP_DIR="/tmp/$GH_REPO"
     [ -d "$BACKUP_TEMP_DIR" ] && rm -rf "$BACKUP_TEMP_DIR"
     
@@ -57,7 +61,6 @@ do_backup() {
     BACKUP_FILE="komari-$TIME.tar.gz"
     
     hint "正在压缩数据目录: $DATA_DIR"
-    # 压缩整个 data 目录  -C "$WORK_DIR" 确保压缩包内路径为 data/...
     tar czvf "$BACKUP_TEMP_DIR/$BACKUP_FILE" -C "$WORK_DIR" data/
 
     if [ ! -s "$BACKUP_TEMP_DIR/$BACKUP_FILE" ]; then
@@ -67,7 +70,6 @@ do_backup() {
 
     cd "$BACKUP_TEMP_DIR" || error "进入临时仓库目录失败。"
     
-    # 清理旧备份：只保留最新的 5 个 .tar.gz 文件
     hint "正在清理旧备份，保留最新的 5 个..."
     find ./ -name 'komari-*.tar.gz' | sort | head -n -5 | xargs -r rm -f
     
