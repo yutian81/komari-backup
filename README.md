@@ -44,9 +44,11 @@ docker run -d \
 
 镜像已集成自动备份脚本，于北京时间每日凌晨4：00自动备份面板数据、主题设置到指定的github仓库
 
+手动备份：`docker exec komari /app/komari_bak.sh bak`
+
 ### 还原
 
 - 暂停容器：`docker stop komari`
-- 确认还原脚本的位置：`docker exec -it komari ls -l /app/data/komari_bak.sh`
-- 执行还原：`docker exec komari /app/data/komari_bak.sh res`
+- 确认还原脚本的位置：`docker exec -it komari ls -l /app/komari_bak.sh`
+- 执行还原：`docker exec komari /app/komari_bak.sh res`
 - 重启容器：`docker start komari`
